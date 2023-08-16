@@ -83,3 +83,5 @@ gem "erb2haml", "~> 0.1.5", :github => "dhl/erb2haml"
 gem "active_decorator", "~> 1.4"
 
 gem "aasm", "~> 5.5"
+
+gem "high_voltage", "~> 3.1"
