@@ -1,5 +1,10 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root to: 'tasks#index'
+
+  mount Sidekiq::Web => '/sidekiq'
+
   resources :entries, except: :index
   resources :tasks do
     resources :entries, only: :index

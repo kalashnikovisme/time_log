@@ -85,3 +85,5 @@ gem "active_decorator", "~> 1.4"
 gem "aasm", "~> 5.5"
 
 gem "high_voltage", "~> 3.1"
+
+gem "sidekiq", "~> 7.1"

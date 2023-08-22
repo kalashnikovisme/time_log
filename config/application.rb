@@ -10,7 +10,10 @@ module TimeLog
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-config.generators.template_engine = :haml
+    
+    config.generators.template_engine = :haml
+
+    config.active_job.queue_adapter = :sidekiq
 
     # Configuration for the application, engines, and railties goes here.
     #
