@@ -14,4 +14,6 @@ class Task < ApplicationRecord
       transitions from: :unviewed, to: :declined
     end
   end
+
+  after_create -> { broadcast_append_to :tasks }
 end
