@@ -36,3 +36,5 @@
 
 vendor/javascript/
 ruby-debug*
+
+.env

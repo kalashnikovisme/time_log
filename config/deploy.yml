@@ -1,0 +1,60 @@
+service: time_log
+image: kalashnikovisme/time_log
+servers:
+  web:
+    - <%= ENV['MAIN_HOST'] %>
+  sidekiq:
+    hosts:
+      - <%= ENV['MAIN_HOST'] %>
+    cmd: bundle exec sidekiq -C config/sidekiq.yml
+
+
+builder:
+  multiarch: false
+  cache:
+    type: gha
+
+healthcheck:
+  path: "/"
+  interval: 1s
+  max_attempts: 5
+
+registry:
+  username: kalashnikovisme
+  password:
+    - MRSK_REGISTRY_PASSWORD
+
+env:
+  clear:
+    REDIS_URL: "redis://:<%= ENV['REDIS_PASSWORD'] %>@<%= ENV['REDIS_HOST'] %>:6379/1"
+  secret:
+    - DB_HOST
+    - POSTGRES_USER
+    - POSTGRES_DB
+    - POSTGRES_PASSWORD
+    - RAILS_MASTER_KEY
+    - SECRET_KEY_BASE
+    - ACTIVE_RECORD_ENCRYPT_PRIMARY_KEY
+    - ACTIVE_RECORD_ENCRYPT_DETERMINISTIC_KEY
+    - ACTIVE_RECORD_ENCRYPT_KEY_DERIVATION_SALT
+
+accessories:
+  db:
+    image: postgres:15.0
+    host: <%= ENV['DB_HOST'] %>
+    port: 5432
+    env:
+      secret:
+        - POSTGRES_PASSWORD
+        - POSTGRES_USER
+        - POSTGRES_DB
+    directories:
+      - postgres:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.0.10
+    host: <%= ENV['REDIS_HOST'] %>
+    port: 6379
+    cmd: redis-server --requirepass <%= ENV['REDIS_PASSWORD'] %>
+    volumes:
+      - /var/lib/redis:/data
