@@ -35,7 +35,7 @@ x-backend: &backend
     PSQL_HISTFILE: /usr/local/hist/.psql_history
     IRB_HISTFILE: /usr/local/hist/.irb_history
     EDITOR: vi
-  depends_on:
+  depends_on: &backend_depends_on
     postgres:
       condition: service_healthy
     redis:
@@ -54,11 +54,14 @@ services:
 
   rspec:
     <<: *backend
+    depends_on:
+      <<: *backend_depends_on
     environment:
+      <<: *backend_environment
       RAILS_ENV: test
 
   postgres:
-    image: postgres:14
+    image: postgres:15
     volumes:
       - .psqlrc:/root/.psqlrc:ro
       - postgres:/var/lib/postgresql/data
