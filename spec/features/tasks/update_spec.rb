@@ -16,6 +16,8 @@ feature 'Update task' do
 
     expect(current_path).to eq task_path(task)
     expect(page).to have_content attributes[:title]
+
+    task.reload
     expect(task.title).to eq attributes[:title]
   end
 end

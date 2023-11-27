@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :entry do
-    comment { 'Comment' }
-    time { '3h 10m' }
+    comment { Faker::Lorem.sentence }
+    time { generate :time }
     task { create :task }
   end
 end

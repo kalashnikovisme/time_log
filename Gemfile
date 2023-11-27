@@ -87,3 +87,5 @@ gem "aasm", "~> 5.5"
 gem "high_voltage", "~> 3.1"
 
 gem "factory_bot_rails", "~> 6.2"
+
+gem "faker", "~> 3.2"

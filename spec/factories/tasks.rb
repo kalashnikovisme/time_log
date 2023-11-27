@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :task do
-    title { 'Task First title' }
+    title { generate :string }
     description { '<b>Description</b>' }
   end
 end
