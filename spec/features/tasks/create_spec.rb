@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Create new task' do
+feature 'Create task' do
   let(:attributes) { attributes_for :task }
 
   scenario 'User creates new task' do
