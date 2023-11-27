@@ -1,5 +1,5 @@
 class Task < ApplicationRecord
-  include AASM
+  has_many :entries
 
   aasm do
     state :unviewed, initial: true

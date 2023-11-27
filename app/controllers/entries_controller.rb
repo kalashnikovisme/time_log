@@ -52,7 +52,7 @@ class EntriesController < ApplicationController
     @entry.destroy
 
     respond_to do |format|
-      format.html { redirect_to entries_url, notice: "Entry was successfully destroyed." }
+      format.html { redirect_to task_entries_url(@entry.task), notice: "Entry was successfully destroyed." }
       format.json { head :no_content }
     end
   end
