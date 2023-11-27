@@ -7,11 +7,15 @@ feature 'Visit Task Index' do
     expect(page).to have_content('Tasks')
   end
 
-  scenario 'User receives the first task' do
-    create :task
+  context 'with tasks collection' do
+    before do
+      create_list :task, 5
+    end
 
-    visit tasks_path
-    
-    expect(page).to have_content Task.first.title
+    scenario 'User receives the first task' do
+      visit tasks_path
+
+      expect(page).to have_content Task.first.title
+    end
   end
 end
