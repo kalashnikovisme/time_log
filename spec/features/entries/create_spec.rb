@@ -14,7 +14,6 @@ feature 'Create entry' do
 
       fill_in 'Time', with: attributes[:time]
       fill_in 'Comment', with: attributes[:comment]
-      fill_in 'Task', with: task.id
 
       click_on 'Create Entry'
     end.to change(task.entries, :count).by 1
