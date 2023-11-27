@@ -1,9 +1,10 @@
 class EntriesController < ApplicationController
   before_action :set_entry, only: %i[ show edit update destroy ]
+  before_action :set_task, only: [ :new, :index ]
 
   # GET /entries or /entries.json
   def index
-@entries = Entry.where task_id: params[:task_id]
+    @entries = @task.entries
   end
 
   # GET /entries/1 or /entries/1.json
@@ -12,7 +13,7 @@ class EntriesController < ApplicationController
 
   # GET /entries/new
   def new
-    @entry = Entry.new
+    @entry = @task.entries.build
   end
 
   # GET /entries/1/edit
@@ -61,6 +62,10 @@ class EntriesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_entry
       @entry = Entry.find(params[:id])
+    end
+
+    def set_task
+      @task = Task.find params[:task_id]
     end
 
     # Only allow a list of trusted parameters through.

@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root to: 'tasks#index'
-  resources :entries, except: :index
+  resources :entries, except: [:index, :new]
   resources :tasks do
-    resources :entries, only: :index
+    resources :entries, only: [:index, :new]
 
     member do
       patch :approve
