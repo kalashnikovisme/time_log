@@ -30,8 +30,10 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-          
+
       - name: Set up database schema
         run: bin/rails db:create db:migrate
       - name: Run tests
-        run: bundle exec rspec
+        run: |
+          bin/rake spec:prepare
+          bundle exec rspec
