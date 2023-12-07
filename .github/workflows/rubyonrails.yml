@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - ci_prepare
   pull_request:
     branches:
       - main
